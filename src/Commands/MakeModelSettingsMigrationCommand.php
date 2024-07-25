@@ -38,7 +38,8 @@ class MakeModelSettingsMigrationCommand extends BaseCommand implements PromptsFo
         // Store the model name for later use.
         $model = (new ModelFinderService)->getModel($this->input->getArgument('name'));
         // Set the name for the migration.
-        $name = Str::snake(trim($this->input->getArgument('name')));
+        $name = 'add_settings_column_to_'.
+            Str::snake(trim($this->input->getArgument('name'))).'_table';
 
         $table = (new $model)->getTable();
 

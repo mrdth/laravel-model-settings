@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         $column_name = env('MRDTH_MODEL_SETTINGS_COLUMN_NAME', 'settings');
-        Schema::table('{{ table }}', function (Blueprint $table) {
+        Schema::table('{{ table }}', function (Blueprint $table) use ($column_name) {
             $table->json($column_name)->nullable();
         });
     }
