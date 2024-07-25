@@ -11,7 +11,6 @@ class ModelFinderService
 {
     public function getModel($model): ?string
     {
-        dd($model);
         $models = collect(File::allFiles(app_path()))
             ->map(function ($item) {
                 $path = $item->getRelativePathName();

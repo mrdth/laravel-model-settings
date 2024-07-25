@@ -6,15 +6,16 @@ use Mrdth\LaravelModelSettings\Services\ModelFinderService;
 it('runs successfully', function () {
     $this->withoutExceptionHandling();
 
-    $mock = Mockery::mock(ModelFinderService::class)
-        ->shouldReceive('getModel')
+    $mock = Mockery::mock(ModelFinderService::class);
+    $mock->shouldReceive('getModel')
         ->with('ModelWithSettings')
         ->andReturn('\Mrdth\LaravelModelSettings\Tests\Models\ModelWithSettings');
+
+    dd($mock);
 
     $this->artisan(MakeModelSettingsMigrationCommand::class, ['name' => 'ModelWithSettings'])
         ->assertSuccessful();
 
-    dd($mock);
 });
 
 it('creates the migration when called', function () {
