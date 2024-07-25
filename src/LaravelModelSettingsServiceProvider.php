@@ -18,8 +18,6 @@ class LaravelModelSettingsServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-model-settings')
             ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel_model_settings_table')
             ->hasCommand(LaravelModelSettingsCommand::class);
     }
 }
