@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Model
-
  */
 trait HasSettings
 {
@@ -65,7 +64,6 @@ trait HasSettings
         $this->settings = $settings;
         $this->save();
     }
-
 
     private function checkSettingsExist(): void
     {

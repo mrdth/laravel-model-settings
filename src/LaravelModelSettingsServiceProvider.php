@@ -2,9 +2,9 @@
 
 namespace Mrdth\LaravelModelSettings;
 
+use Mrdth\LaravelModelSettings\Commands\LaravelModelSettingsCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Mrdth\LaravelModelSettings\Commands\LaravelModelSettingsCommand;
 
 class LaravelModelSettingsServiceProvider extends PackageServiceProvider
 {

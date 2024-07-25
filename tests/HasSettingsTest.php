@@ -1,11 +1,9 @@
 <?php
 
-
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Mrdth\LaravelModelSettings\Tests\Models\ModelWithoutSettings;
 use Mrdth\LaravelModelSettings\Tests\Models\ModelWithSettings;
-
 
 beforeEach(function () {
     Schema::create(
@@ -23,7 +21,7 @@ afterEach(function () {
 });
 
 test('it initializes settings correctly', function () {
-    $model = new ModelWithSettings();
+    $model = new ModelWithSettings;
 
     // Check if settings is added to $fillable.
     expect($model->getFillable())->toContain('settings');
@@ -46,7 +44,7 @@ test('it checks model database table has settings column', function () {
     $this->expectException(\Exception::class);
     $this->expectExceptionMessage("Table 'model-without-settings' does not have a 'settings' column");
 
-    $model = new ModelWithoutSettings();
+    $model = new ModelWithoutSettings;
 });
 
 test('it checks model database table settings column is json type', function () {
@@ -62,18 +60,18 @@ test('it checks model database table settings column is json type', function () 
     $this->expectException(\Exception::class);
     $this->expectExceptionMessage('Settings column is not json type');
 
-    $model = new ModelWithoutSettings();
+    $model = new ModelWithoutSettings;
 });
 
 test('it can get setting', function () {
-    $model = new ModelWithSettings();
+    $model = new ModelWithSettings;
     $model->settings = ['foo' => 'bar'];
 
     expect($model->getSetting('foo'))->toEqual('bar');
 });
 
 test('it can add settings', function () {
-    $model = new ModelWithSettings();
+    $model = new ModelWithSettings;
 
     $model->addSetting('foo', 'bar');
 
@@ -81,7 +79,7 @@ test('it can add settings', function () {
 });
 
 test('it can update settings', function () {
-    $model = new ModelWithSettings();
+    $model = new ModelWithSettings;
     $model->settings = ['foo' => 'bar'];
 
     $model->updateSetting('foo', 'baz');
@@ -90,7 +88,7 @@ test('it can update settings', function () {
 });
 
 test('it can delete settings', function () {
-    $model = new ModelWithSettings();
+    $model = new ModelWithSettings;
     $model->settings = ['foo' => 'bar'];
 
     $model->deleteSetting('foo');
@@ -99,7 +97,7 @@ test('it can delete settings', function () {
 });
 
 test('it can delete all settings', function () {
-    $model = new ModelWithSettings();
+    $model = new ModelWithSettings;
     $model->settings = ['foo' => 'bar', 'baz' => 'qux'];
 
     $model->deleteSettings();
@@ -109,7 +107,7 @@ test('it can delete all settings', function () {
 });
 
 test('it throws exception when adding setting which already exists', function () {
-    $model = new ModelWithSettings();
+    $model = new ModelWithSettings;
     $model->settings = ['foo' => 'bar'];
 
     $this->expectException(\Exception::class);
@@ -118,19 +116,16 @@ test('it throws exception when adding setting which already exists', function ()
 });
 
 test('it can get all settings', function () {
-    $model = new ModelWithSettings();
+    $model = new ModelWithSettings;
     $model->settings = ['foo' => 'bar', 'baz' => 'qux'];
 
     expect($model->getSettings())->toEqual(['foo' => 'bar', 'baz' => 'qux']);
 });
 
 test('it can check if setting exists', function () {
-    $model = new ModelWithSettings();
+    $model = new ModelWithSettings;
     $model->settings = ['foo' => 'bar'];
 
     expect($model->hasSetting('foo'))->toBeTrue()
         ->and($model->hasSetting('baz'))->toBeFalse();
 });
-
-
-

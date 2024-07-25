@@ -2,9 +2,8 @@
 
 namespace Mrdth\LaravelModelSettings\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use Mrdth\LaravelModelSettings\LaravelModelSettingsServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
