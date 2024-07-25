@@ -28,4 +28,7 @@
             <directory suffix=".php">./src</directory>
         </include>
     </source>
+    <php>
+        <env name="MRDTH_MODEL_SETTINGS_COLUMN_NAME" value="test-settings"/>
+    </php>
 </phpunit>
