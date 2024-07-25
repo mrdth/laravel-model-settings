@@ -2,7 +2,7 @@
 
 namespace Mrdth\LaravelModelSettings;
 
-use Mrdth\LaravelModelSettings\Commands\LaravelModelSettingsCommand;
+use Mrdth\LaravelModelSettings\Commands\MakeModelSettingsMigrationCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -18,6 +18,6 @@ class LaravelModelSettingsServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-model-settings')
             ->hasConfigFile()
-            ->hasCommand(LaravelModelSettingsCommand::class);
+            ->hasCommand(MakeModelSettingsMigrationCommand::class);
     }
 }
