@@ -60,6 +60,27 @@ php artisan make::msm {model}
 
 To change the column used for settings you can update the `MRDTH_MODEL_SETTINGS_COLUMN_NAME` in your `.env` file.
 
+Once the trait is added you can interact with the settings using methodsL
+
+```php
+$user = User::find(1);
+$user->hasSetting('use custom avatar'); // false
+
+$user->setSetting('use custom avatar', true);
+$user->hasSetting('use custom avatar'); // true
+$user->getSetting('use custom avatar'); // true
+
+$user->updateSetting('use custom avatar', false);
+$user->getSetting('use custom avatar'); // false
+
+$user->getSettings(); // ['use custom avatar' => false]
+
+$user->deleteSetting('use custom avatar');
+$user->hasSetting('use custom avatar'); // false
+
+$user->deleteSettings();
+```
+
 ## Testing
 
 ```bash

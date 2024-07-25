@@ -3,6 +3,8 @@
 namespace Mrdth\LaravelModelSettings\Concerns;
 
 use Illuminate\Support\Facades\Schema;
+use Mrdth\LaravelModelSettings\Exceptions\InvalidColumnTypeException;
+use Mrdth\LaravelModelSettings\Exceptions\MissingSettingsColumnException;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Model
@@ -68,16 +70,19 @@ trait HasSettings
         $this->save();
     }
 
+    /**
+     * @throws \Throwable If the settings column does not exist or is not a json column
+     */
     private function checkSettingsExist(): void
     {
         throw_unless(
             Schema::hasColumn($this->getTable(), $this->settings_column),
-            new \Exception("Table '{$this->getTable()}' does not have a '{$this->settings_column}' column")
+            new MissingSettingsColumnException("Table '{$this->getTable()}' does not have a '{$this->settings_column}' column")
         );
 
         throw_unless(
             in_array(Schema::getColumnType($this->getTable(), $this->settings_column), ['json', 'text']),
-            new \Exception("'{$this->settings_column}' column is not json type")
+            new InvalidColumnTypeException("'{$this->settings_column}' column is not json type")
         );
     }
 }
