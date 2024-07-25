@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Mrdth\LaravelModelSettings\Exceptions\InvalidColumnTypeException;
+use Mrdth\LaravelModelSettings\Exceptions\MissingSettingsColumnException;
 use Mrdth\LaravelModelSettings\Tests\Models\ModelWithoutSettings;
 use Mrdth\LaravelModelSettings\Tests\Models\ModelWithSettings;
 
@@ -46,7 +48,7 @@ it('checks model database table has settings column', function () {
         }
     );
 
-    $this->expectException(\Exception::class);
+    $this->expectException(MissingSettingsColumnException::class);
     $this->expectExceptionMessage("Table 'model-without-settings' does not have a '$settings_column' column");
 
     $model = new ModelWithoutSettings;
@@ -63,7 +65,7 @@ it('checks model database table settings column is json type', function () {
         }
     );
 
-    $this->expectException(\Exception::class);
+    $this->expectException(InvalidColumnTypeException::class);
     $this->expectExceptionMessage("'$settings_column' column is not json type");
 
     $model = new ModelWithoutSettings;
