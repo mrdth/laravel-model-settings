@@ -16,7 +16,7 @@ class ModelFinderService
                 $path = $item->getRelativePathName();
                 $class = sprintf(
                     "\%s%s",
-                    Container::getInstance()->getNamespace(),
+                    Container::getInstance()->getNamespace(), // @phpstan-ignore-line
                     strtr(substr($path, 0, strrpos($path, '.')), '/', '\\')
                 );
 
