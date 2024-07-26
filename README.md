@@ -31,20 +31,9 @@ return [
 
 ## Usage
 
-Add the `HasSettings` trait to any Eloquent model you want to have settings.
+### Migrations
 
-```php
-...
-use Illuminate\Notifications\Notifiable;
-use Mrdth\LaravelModelSettings\Concerns\HasSettings;
-
-class User extends Authenticatable
-{
-    use HasFactory, Notifiable, HasSettings;
-...
-```
-
-then add the settings column to your model's migration.
+First add the settings column to your model's migration.
 
 ```php
 ...
@@ -59,6 +48,23 @@ php artisan make::msm {model}
 ```
 
 To change the column used for settings you can update the `MRDTH_MODEL_SETTINGS_COLUMN_NAME` in your `.env` file.
+
+### Models
+
+Next add the `HasSettings` trait to any Eloquent model you want to have settings.
+
+```php
+...
+use Illuminate\Notifications\Notifiable;
+use Mrdth\LaravelModelSettings\Concerns\HasSettings;
+
+class User extends Authenticatable
+{
+    use HasFactory, Notifiable, HasSettings;
+...
+```
+
+### Using the model settings
 
 Once the trait is added you can interact with the settings using methodsL
 
