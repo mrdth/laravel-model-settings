@@ -8,17 +8,21 @@ return new class extends Migration
 {
     public function up()
     {
-        $column_name = env('MRDTH_MODEL_SETTINGS_COLUMN_NAME', 'settings');
-        Schema::table('{{ table }}', function (Blueprint $table) use ($column_name) {
-            $table->json($column_name)->nullable();
-        });
+        $column_name = config('model-settings.column', 'settings');
+        if (!Schema::hasColumn('{{ table }}', $column_name)) {
+            Schema::table('{{ table }}', function (Blueprint $table) use ($column_name) {
+                $table->json($column_name)->nullable();
+            });
+        }
     }
 
     public function down()
     {
-        $column_name = env('MRDTH_MODEL_SETTINGS_COLUMN_NAME', 'settings');
-        Schema::table('{{ table }}', function (Blueprint $table) use ($column_name) {
-            $table->dropColumn($column_name);
-        });
+        $column_name = config('model-settings.column', 'settings');
+        if (Schema::hasColumn('{{ table }}', $column_name)) {
+            Schema::table('{{ table }}', function (Blueprint $table) use ($column_name) {
+                $table->dropColumn($column_name);
+            });
+        }
     }
 };
