@@ -39,7 +39,7 @@ trait HasSettings
     {
         $this->checkSettingsExist();
 
-        return $this->{$this->settings_column};
+        return $this->{$this->settings_column} ?? [];
     }
 
     /**
