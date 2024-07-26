@@ -17,35 +17,57 @@ trait HasSettings
     public function initializeHasSettings(): void
     {
         $this->settings_column = config('model-settings.column', 'settings');
-        $this->checkSettingsExist();
 
         $this->mergeFillable([$this->settings_column]);
         $this->mergeCasts([$this->settings_column => 'array']);
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function hasSetting($name): bool
     {
+        $this->checkSettingsExist();
+
         return isset($this->{$this->settings_column}[$name]);
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function getSettings(): array
     {
+        $this->checkSettingsExist();
+
         return $this->{$this->settings_column};
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function deleteSettings(): void
     {
+        $this->checkSettingsExist();
         $this->{$this->settings_column} = null;
         $this->save();
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function getSetting(string $name, $default = null)
     {
+        $this->checkSettingsExist();
+
         return $this->{$this->settings_column}[$name] ?? $default;
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function addSetting(string $name, $value): void
     {
+        $this->checkSettingsExist();
         throw_if(
             $this->getSetting($name) !== null,
             new \Exception("Setting '$name' already exists")
@@ -54,16 +76,24 @@ trait HasSettings
         $this->updateSetting($name, $value);
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function updateSetting(string $name, $value): void
     {
+        $this->checkSettingsExist();
         $settings = $this->{$this->settings_column};
         $settings[$name] = $value;
         $this->{$this->settings_column} = $settings;
         $this->save();
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function deleteSetting(string $name): void
     {
+        $this->checkSettingsExist();
         $settings = $this->{$this->settings_column};
         unset($settings[$name]);
         $this->{$this->settings_column} = $settings;
