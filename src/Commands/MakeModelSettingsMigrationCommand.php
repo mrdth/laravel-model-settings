@@ -7,7 +7,6 @@ use Illuminate\Database\Console\Migrations\BaseCommand;
 use Illuminate\Database\Migrations\MigrationCreator;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Composer;
-use Illuminate\Support\Str;
 use Mrdth\LaravelModelSettings\Services\ModelFinderService;
 
 class MakeModelSettingsMigrationCommand extends BaseCommand implements PromptsForMissingInput
@@ -37,11 +36,11 @@ class MakeModelSettingsMigrationCommand extends BaseCommand implements PromptsFo
     {
         // Store the model name for later use.
         $model = (new ModelFinderService)->getModel($this->input->getArgument('name'));
-        // Set the name for the migration.
-        $name = 'add_settings_column_to_'.
-            Str::snake(trim($this->input->getArgument('name'))).'_table';
 
         $table = (new $model)->getTable();
+
+        // Set the name for the migration.
+        $name = "add_settings_column_to_{$table}_table";
 
         // Now we are ready to write the migration out to disk. Once we've written
         // the migration out, we will dump-autoload for the entire framework to
