@@ -79,6 +79,12 @@ it('can get setting', function () {
     expect($model->getSetting('foo'))->toEqual('bar');
 });
 
+it('can get setting with default value', function () {
+    $model = new ModelWithSettings;
+
+    expect($model->getSetting('foo', 'bar'))->toEqual('bar');
+});
+
 it('can add settings', function () {
     $model = new ModelWithSettings;
 

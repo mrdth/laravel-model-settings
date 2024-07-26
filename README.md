@@ -78,6 +78,8 @@ $user->getSetting('use custom avatar'); // true
 
 $user->updateSetting('use custom avatar', false);
 $user->getSetting('use custom avatar'); // false
+$user->getSetting('non-existent setting'); // null
+$user->getSetting('non-existent setting', 'default value'); // 'default value'
 
 $user->getSettings(); // ['use custom avatar' => false]
 

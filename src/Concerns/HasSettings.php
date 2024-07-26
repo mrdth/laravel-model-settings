@@ -39,9 +39,9 @@ trait HasSettings
         $this->save();
     }
 
-    public function getSetting(string $name)
+    public function getSetting(string $name, $default = null)
     {
-        return $this->{$this->settings_column}[$name] ?? null;
+        return $this->{$this->settings_column}[$name] ?? $default;
     }
 
     public function addSetting(string $name, $value): void
