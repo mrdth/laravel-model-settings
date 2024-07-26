@@ -13,4 +13,12 @@ return new class extends Migration
             $table->json($column_name)->nullable();
         });
     }
+
+    public function down()
+    {
+        $column_name = env('MRDTH_MODEL_SETTINGS_COLUMN_NAME', 'settings');
+        Schema::table('{{ table }}', function (Blueprint $table) use ($column_name) {
+            $table->dropColumn($column_name);
+        });
+    }
 };
