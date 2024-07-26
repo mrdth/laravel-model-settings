@@ -7,6 +7,7 @@ use Illuminate\Database\Console\Migrations\BaseCommand;
 use Illuminate\Database\Migrations\MigrationCreator;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Composer;
+use Illuminate\Support\Facades\Schema;
 use Mrdth\LaravelModelSettings\Services\ModelFinderService;
 
 class MakeModelSettingsMigrationCommand extends BaseCommand implements PromptsForMissingInput
@@ -35,9 +36,31 @@ class MakeModelSettingsMigrationCommand extends BaseCommand implements PromptsFo
     public function handle()
     {
         // Store the model name for later use.
-        $model = (new ModelFinderService)->getModel($this->input->getArgument('name'));
+        $model_candidates = (new ModelFinderService)->getModel($this->input->getArgument('name'));
+
+        if ($model_candidates->isEmpty()) {
+            $this->error('Model not found.');
+
+            return;
+        }
+
+        if ($model_candidates->count() > 1) {
+            $model = $this->choice(
+                'Multiple models found. Which model do you want to add settings to?',
+                $model_candidates->toArray()
+            );
+        } else {
+            $model = $model_candidates->first();
+        }
 
         $table = (new $model)->getTable();
+
+        $column = config('model-settings.column', 'settings');
+        if (Schema::hasColumn($table, $column)) {
+            $this->error("The '{$column}' column already exists on the '{$table}' table.");
+
+            return;
+        }
 
         // Set the name for the migration.
         $name = "add_settings_column_to_{$table}_table";

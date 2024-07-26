@@ -4,12 +4,13 @@ namespace Mrdth\LaravelModelSettings\Services;
 
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class ModelFinderService
 {
-    public function getModel($model): ?string
+    public function getModel($model): Collection
     {
         $models = collect(File::allFiles(app_path()))
             ->map(function ($item) {
@@ -36,6 +37,6 @@ class ModelFinderService
                 return $valid;
             });
 
-        return $models->first();
+        return $models;
     }
 }
