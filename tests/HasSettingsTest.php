@@ -52,6 +52,7 @@ it('checks model database table has settings column', function () {
     $this->expectExceptionMessage("Table 'model-without-settings' does not have a '$settings_column' column");
 
     $model = new ModelWithoutSettings;
+    $model->getSetting('foo');
 });
 
 it('checks model database table settings column is json type', function () {
@@ -69,6 +70,7 @@ it('checks model database table settings column is json type', function () {
     $this->expectExceptionMessage("'$settings_column' column is not json type");
 
     $model = new ModelWithoutSettings;
+    $model->getSetting('foo');
 });
 
 it('can get setting', function () {
