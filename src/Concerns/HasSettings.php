@@ -2,6 +2,7 @@
 
 namespace Mrdth\LaravelModelSettings\Concerns;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Schema;
 use Mrdth\LaravelModelSettings\Exceptions\InvalidColumnTypeException;
 use Mrdth\LaravelModelSettings\Exceptions\MissingSettingsColumnException;
@@ -98,6 +99,16 @@ trait HasSettings
         unset($settings[$name]);
         $this->{$this->settings_column} = $settings;
         $this->save();
+    }
+
+    public function scopeWhereHasSetting(Builder $query, string $setting_name, mixed $value = null): void
+    {
+        if ($value === null) {
+            $query->where("{$this->settings_column}->$setting_name", '!=', null);
+
+            return;
+        }
+        $query->whereJsonContains($this->settings_column, [$setting_name => $value]);
     }
 
     /**

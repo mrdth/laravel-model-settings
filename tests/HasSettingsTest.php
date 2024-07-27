@@ -152,3 +152,33 @@ it('can check if setting exists', function () {
     expect($model->hasSetting('foo'))->toBeTrue()
         ->and($model->hasSetting('baz'))->toBeFalse();
 });
+
+it('can return models which have a given setting', function () {
+    $model1 = ModelWithSettings::create();
+    $model1->addSetting('foo', 'bar');
+
+    $model2 = ModelWithSettings::create();
+    $model2->addSetting('foo', 'baz');
+
+    $model3 = ModelWithSettings::create();
+    $model3->addSetting('baz', 'qux');
+
+    $models = ModelWithSettings::whereHasSetting('foo')->get();
+
+    expect($models)->toHaveCount(2)
+        ->and($models->first())->toEqual($model1->fresh())
+        ->and($models->last())->toEqual($model2->fresh());
+});
+
+it('can return models which have a given setting and value', function () {
+    $model1 = ModelWithSettings::create();
+    $model1->addSetting('foo', 'bar');
+
+    $model2 = ModelWithSettings::create();
+    $model2->addSetting('foo', 'baz');
+
+    $models = ModelWithSettings::whereHasSetting('foo', 'bar')->get();
+
+    expect($models)->toHaveCount(1)
+        ->and($models->first())->toEqual($model1->fresh());
+});
