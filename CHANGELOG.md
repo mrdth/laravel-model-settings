@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-model-settings` will be documented in this file.
 
+## Unreleased
+
+Add Laravel 12 support
+
 ## v1.1.0 - 2024-07-27
 
 Add query scopes
