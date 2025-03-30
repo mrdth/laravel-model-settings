@@ -2,7 +2,7 @@
 
 All notable changes to `laravel-model-settings` will be documented in this file.
 
-## Unreleased
+## v1.2.0 - 2025-03-30
 
 Add Laravel 12 support
 
