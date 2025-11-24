@@ -94,8 +94,8 @@ $user->deleteSettings();
 You can also query models based on their settings.
 
 ```php
-$users = User::whereSetting('use custom avatar')->get(); // Returns all users with the setting 'use custom avatar'
-$users = User::whereSetting('use custom avatar', true)->get(); // Returns all users with the setting 'use custom avatar' set to true
+$users = User::whereHasSetting('use custom avatar')->get(); // Returns all users with the setting 'use custom avatar'
+$users = User::whereHasSetting('use custom avatar', true)->get(); // Returns all users with the setting 'use custom avatar' set to true
 ```
 
 ## Testing
