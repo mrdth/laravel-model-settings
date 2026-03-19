@@ -44,7 +44,7 @@ First add the settings column to your model's migration.
 For existing models you can create a migration using our artisan command.
 
 ```bash
-php artisan make::msm {model}
+php artisan make:msm {model}
 ```
 
 To change the column used for settings you can update the `MRDTH_MODEL_SETTINGS_COLUMN_NAME` in your `.env` file.
@@ -66,13 +66,13 @@ class User extends Authenticatable
 
 ### Using the model settings
 
-Once the trait is added you can interact with the settings using methodsL
+Once the trait is added you can interact with the settings using methods:
 
 ```php
 $user = User::find(1);
 $user->hasSetting('use custom avatar'); // false
 
-$user->setSetting('use custom avatar', true);
+$user->addSetting('use custom avatar', true);
 $user->hasSetting('use custom avatar'); // true
 $user->getSetting('use custom avatar'); // true
 
