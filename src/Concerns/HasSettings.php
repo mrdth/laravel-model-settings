@@ -3,12 +3,13 @@
 namespace Mrdth\LaravelModelSettings\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Schema;
 use Mrdth\LaravelModelSettings\Exceptions\InvalidColumnTypeException;
 use Mrdth\LaravelModelSettings\Exceptions\MissingSettingsColumnException;
 
 /**
- * @mixin \Illuminate\Database\Eloquent\Model
+ * @mixin Model
  */
 trait HasSettings
 {

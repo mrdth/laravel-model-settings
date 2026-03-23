@@ -131,7 +131,7 @@ it('throws exception when adding setting which already exists', function () {
     $model = new ModelWithSettings;
     $model->$settings_column = ['foo' => 'bar'];
 
-    $this->expectException(\Exception::class);
+    $this->expectException(Exception::class);
     $this->expectExceptionMessage("Setting 'foo' already exists");
     $model->addSetting('foo', 'baz');
 });
