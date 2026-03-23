@@ -7,12 +7,16 @@
 
 This package utilizes Eloquents JSON casting to provide a simple way to add settings to any Eloquent model.
 
+## Requirements
+- [PHP 8.3+](https://php.net/releases/)
+- [Laravel 12+](https://laravel.com)
+
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require mrdth/laravel-model-settings
+composer require mrdth/laravel-model-settings:^2.0
 ```
 
 You can publish the config file with:
