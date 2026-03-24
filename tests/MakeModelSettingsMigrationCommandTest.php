@@ -1,6 +1,6 @@
 <?php
 
-//it('runs successfully', function () {
+// it('runs successfully', function () {
 //    $this->withoutExceptionHandling();
 //
 //    $mock = Mockery::mock(ModelFinderService::class);
@@ -13,12 +13,12 @@
 //    $this->artisan(MakeModelSettingsMigrationCommand::class, ['name' => 'ModelWithSettings'])
 //        ->assertSuccessful();
 //
-//});
+// });
 //
-//it('creates the migration when called', function () {
+// it('creates the migration when called', function () {
 //    $this->artisan(MakeModelSettingsMigrationCommand::class, ['name' => 'ModelWithSettings'])
 //        ->assertExitCode(0);
 //
 //    $this->assertFileExists(database_path('migrations'));
 //
-//});
+// });
